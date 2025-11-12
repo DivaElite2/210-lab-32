@@ -21,7 +21,7 @@ void initializeLine() {
         //Create new car 
         Car newCar;
         // add car to back of line
-        lane.push_back(neWCar);
+        lane.push_back(newCar);
     }
     cout << "Initialized with " << INITIAL_CARS << "cars in line "<<endl; 
 
@@ -29,9 +29,19 @@ void initializeLine() {
 
 void simulationStep () {
     //Add simulation Generate random number
+    int randomEvent = rand() % 100 + 1;
+
+    if(randomEvent <= 55) {
+        processCar();
+    }else {
+        carArrives();
+    }
 }
 
-void processCars() {
+void processCar() {
+    if(lane.empty()) {
+        cout << "No cars in line to process " <<endl;
+    }
 
 }
 
