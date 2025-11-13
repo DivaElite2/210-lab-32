@@ -86,7 +86,12 @@ int main()
  booth.displayLine();
 
  int time = 1;
- while()
+ while(booth.hasCars()) {
+    cout << "\n---- Time "<< time << "--------"<<endl;
+    booth.simulationStep();
+    time++;
+ }
+ cout << "Que empty" <<endl;
 
     return 0;
 }
