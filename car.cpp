@@ -65,13 +65,13 @@ void carArrives() {
 void displayLine() {
    // TODO: Iterate through deque and call print() for each car
    cout <<"Current Line (" << lane.size() << "cars): ";
-   for(const auto& car: lane) {
+   for(auto& car : lane) {
        car.print();
    }
 }
 
 bool hasCars() {
-
+   return !lane.empty();
 }
 
 
