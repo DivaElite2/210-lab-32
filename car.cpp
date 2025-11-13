@@ -31,24 +31,35 @@ void simulationStep () {
     //Add simulation Generate random number
     int randomEvent = rand() % 100 + 1;
 
-    if(randomEvent <= 55) {
+    if(randomEvent <= 55) { //55% probability
         processCar();
     }else {
-        carArrives();
+        carArrives(); // 45% probability
     }
+    displayLine();
 }
 
+
+// process from front
 void processCar() {
-    if(lane.empty()) {
-        cout << "No cars in line to process " <<endl;
-    }
+    if(lane.empty())  return;
+
+        cout << "Car pays tolls" <<endl;
+        lane.front().print();// call print on the first car
+        lane.pop_front();
+      
+    
+    cout << "processing car" <<endl;
 
 }
 
 void carArrives() {
-    // TODO: Create a new Car using the constructor
+// TODO: Create a new Car using the constructor
+    Car newCar;
     // Add it to the back of the deque
-
+          lane.push_back(newCar);
+          cout <<"new car arrives" <<endl;
+          newCar.print();
 }
 
 void displayLine() {
