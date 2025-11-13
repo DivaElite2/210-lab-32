@@ -1,5 +1,7 @@
 //Lateefah Camacho
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include <deque>
 #include "Car.h"
 using namespace std;
@@ -79,7 +81,13 @@ bool hasCars() {
 
 int main()
 {
-    /* code */
+ TollBooth booth;
+ booth.initializeLine();
+ booth.displayLine();
+
+ int time = 1;
+ while()
+
     return 0;
 }
 
