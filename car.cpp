@@ -77,6 +77,17 @@ bool hasCars() {
    return !lane.empty();
 }
 
+void switchlanes() {
+    //check for lanes with cars
+    bool canSwitch = false;
+    for(int i = 0; i < NR_LANES; i++) {
+        if(lanes[i].size() > 0) {
+            canSwitch = true;
+            break;
+        }
+    }
+}
+
 
 };
 
