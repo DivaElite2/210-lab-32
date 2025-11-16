@@ -94,10 +94,18 @@ void switchlanes() {
     do {
         sourceLane = rand() % NR_LANES; //random lane 0-3
     } while(lanes[sourceLane].empty());
-    {
-        /* code */
-    }
     
+        
+    //Random lane that is different form source
+    int destLane;
+    do{
+        destLane = rand() % NR_LANES;
+    }while (destLane == sourceLane);// keep looking until different lane opens
+    //move last car from source to destination
+    Car switchingCar = lanes[sourceLane].back();
+
+    //remove it from source lane
+    lanes->pop_back()
 }
 
 
