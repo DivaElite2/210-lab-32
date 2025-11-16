@@ -86,6 +86,18 @@ void switchlanes() {
             break;
         }
     }
+    if(!canSwitch) {
+        return; // no cars in any lane cant switch
+    }
+    //Random lane that has cars
+    int sourceLane;
+    do {
+        sourceLane = rand() % NR_LANES; //random lane 0-3
+    } while(lanes[sourceLane].empty());
+    {
+        /* code */
+    }
+    
 }
 
 
