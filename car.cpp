@@ -7,11 +7,12 @@
 using namespace std;
 
 const int INITIAL_CARS = 2; //const for intitial deque size
+const int NR_LANES = 4; // LANES 4
 
 class TollBooth {
     private:
 //create deque
-deque<Car> lane;
+deque<Car> lanes[NR_LANES];
 
 public:
    TollBooth() {
