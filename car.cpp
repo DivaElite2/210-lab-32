@@ -36,25 +36,34 @@ void initializeLine() {
 
 }
 
-void simulationStep () {
-    for(int laneIndex = 0; laneIndex < NR_LANES; laneIndex++) {
-        cout << "lane " << laneIndex + 1 << ":";
-    //Add simulation Generate random number
-    int randomEvent = rand() % 100 + 1;
-
-     //modify check if lane is empty handle 50/50 case
-    if(lanes[laneIndex].empty()) { 
-        if( randomEvent <= 50) {
-
-        }else {
-            cout<< "Empty lane - no operation" <<endl;
+void simulationStep() {
+    // For EACH lane, perform one random operation
+    for (int laneIndex = 0; laneIndex < NR_LANES; laneIndex++) {
+        cout << "Lane " << laneIndex + 1 << ": ";
+        
+        int randomEvent = rand() % 100 + 1;
+        
+        // TODO: Check if lane is empty and handle 50/50 case
+        if (lanes[laneIndex].empty()) {
+            // Lane is empty - 50/50 for new car or nothing
+            if (randomEvent <= 50) {
+                // Add new car
+            } else {
+                // Do nothing
+                cout << "Empty lane - no operation" << endl;
+            }
+        } else {
+            // Lane has cars - use normal probabilities
+            if (randomEvent <= PROB_PAY_TOLL) {
+                // Car pays toll and leaves from front
+                cout<< 
+            } else if (randomEvent <= PROB_PAY_TOLL + PROB_NEW_CAR) {
+                // New car arrives at back  
+            } else {
+                // Rear car switches lanes
+            }
         }
-    
-    }else {
-        if
     }
-    displayLine();
-   }
 }
 
 
