@@ -43,11 +43,15 @@ void simulationStep() {
         
         int randomEvent = rand() % 100 + 1;
         
-        // TODO: Check if lane is empty and handle 50/50 case
+        // Check if lane is empty and handle 50/50 case
         if (lanes[laneIndex].empty()) {
             // Lane is empty - 50/50 for new car or nothing
             if (randomEvent <= 50) {
                 // Add new car
+                Car newCar;
+                lanes[laneIndex].push_back(newCar);
+                cout << "NEW CAR ARRIVES: ";
+                newCar.print();
             } else {
                 // Do nothing
                 cout << "Empty lane - no operation" << endl;
@@ -56,11 +60,31 @@ void simulationStep() {
             // Lane has cars - use normal probabilities
             if (randomEvent <= PROB_PAY_TOLL) {
                 // Car pays toll and leaves from front
-                cout<< 
+                cout << "CAR PAYS TOLL AND LEAVES: ";
+                lanes[laneIndex].front().print();
+                lanes[laneIndex].pop_front();
             } else if (randomEvent <= PROB_PAY_TOLL + PROB_NEW_CAR) {
                 // New car arrives at back  
+                Car newCar;
+                lanes[laneIndex].push_back(newCar);
+                cout << "NEW CAR ARRIVES: ";
+                newCar.print();
             } else {
                 // Rear car switches lanes
+                // The size() > 0 check is redundant here since we're in the "else" of empty()
+                int destLane;
+                do {
+                    destLane = rand() % NR_LANES;
+                } while (destLane == laneIndex);  // Find a different lane
+                
+                // Move the last car from current lane to destination lane
+                Car switchingCar = lanes[laneIndex].back();
+                lanes[laneIndex].pop_back();
+                lanes[destLane].push_back(switchingCar);
+                
+                cout << "LANE SWITCH: Car moved from lane " << laneIndex + 1 
+                     << " to lane " << destLane + 1 << " - ";
+                switchingCar.print();
             }
         }
     }
