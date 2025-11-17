@@ -25,13 +25,13 @@ public:
   //seed Random number
   srand(time(0));
 }
-void initializeLine() {
-    for(int i = 0; i < INITIAL_CARS; i++) {
-        //Create new car 
-        Car newCar;
-        // add car to back of line
-        lane.push_back(newCar);
+void initializeLanes() {
+    for (int laneIndex = 0; laneIndex < NR_LANES; laneIndex++) {
+        for (int carCount = 0; carCount < INITIAL_CARS; carCount++) {
+            Car newCar;
+            lanes[laneIndex].push_back(newCar);
     }
+ }
     cout << "Initialized with " << INITIAL_CARS << "cars in line "<<endl; 
 
 }
@@ -91,78 +91,20 @@ void simulationStep() {
 }
 
 
-// process from front
-void processCar() {
-    if(lane.empty())  return;
 
-        cout << "Car pays tolls" <<endl;
-        lane.front().print();// call print on the first car
-        lane.pop_front();
-      
-    
-    cout << "processing car" <<endl;
-
-}
-
-void carArrives() {
-// TODO: Create a new Car using the constructor
-    Car newCar;
-    // Add it to the back of the deque
-          lane.push_back(newCar);
-          cout <<"new car arrives" <<endl;
-          newCar.print();
-}
-
-void displayLine() {
-   // TODO: Iterate through deque and call print() for each car
-   cout <<"Current Line (" << lane.size() << "cars): ";
-   for(auto& car : lane) {
-       car.print();
-   }
-}
-
-bool hasCars() {
-   return !lane.empty();
-}
-
-void switchlanes() {
-    //check for lanes with cars
-    bool canSwitch = false;
-    for(int i = 0; i < NR_LANES; i++) {
-        if(lanes[i].size() > 0) {
-            canSwitch = true;
-            break;
-        }
-    }
-    if(!canSwitch) {
-        return; // no cars in any lane cant switch
-    }
-    //Random lane that has cars
-    int sourceLane;
-    do {
-        sourceLane = rand() % NR_LANES; //random lane 0-3
-    } while(lanes[sourceLane].empty());
-    
+void displayLanes() {
+    for (int laneIndex = 0; laneIndex < NR_LANES; laneIndex++) {
+        cout << "Lane " << laneIndex + 1 << " (" << lanes[laneIndex].size() << " cars): ";
         
-    //Random lane that is different form source
-    int destLane;
-    do{
-        destLane = rand() % NR_LANES;
-    }while (destLane == sourceLane);// keep looking until different lane opens
-    //move last car from source to destination
-    Car switchingCar = lanes[sourceLane].back();
-
-    //remove it from source lane
-    lanes[sourceLane].pop_back();
-
-    //add it to destination lane 
-    lanes[destLane].push_back(switchingCar);
-
-    //print what happened
-    cout << "Lane Seitch: Car from lane " << sourceLane +1 << " to lane " << destLane + 1 << " -- ";
-    switchingCar.print();
-
+        // Iterate through each car in this lane and call print
+        for(auto& car : lanes[laneIndex]) {
+            car.print();
+        }
+        cout << endl;  // New line after each lane
+    }
+    cout << endl;  // Extra space after all lanes
 }
+
 
 
 };
@@ -170,17 +112,15 @@ void switchlanes() {
 int main()
 {
  TollBooth booth;
- booth.initializeLine();
- booth.displayLine();
+ booth.initializeLanes();
+ booth.displayLanes();
 
- int time = 1;
- while(booth.hasCars()) {
-    cout << "\n---- Time "<< time << "--------"<<endl;
-    booth.simulationStep();
-    time++;
- }
- cout << "Que empty" <<endl;
-
+ // Run for 20 time periods
+    for (int time = 1; time <= 20; time++) {
+        cout << "\n=== Time Period " << time << " ===" << endl;
+        booth.simulationStep();
+        booth.displayLanes();  // Show state after operations
+    }
     return 0;
 }
 
