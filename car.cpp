@@ -8,6 +8,12 @@ using namespace std;
 
 const int INITIAL_CARS = 2; //const for intitial deque size
 const int NR_LANES = 4; // LANES 4
+const int  TOTAL_TIME_PERIODS = 20;
+
+//Probability constants
+const int PROB_PAY_TOLL = 46;
+const int PROB_NEW_CAR = 39;
+const int PROB_SWITCH_LANES = 15;
 
 class TollBooth {
     private:
@@ -31,6 +37,8 @@ void initializeLine() {
 }
 
 void simulationStep () {
+    for(int laneIndex = 0; laneIndex < NR_LANES; laneIndex++) {
+        cout << "lane " << laneIndex + 1 << ":";
     //Add simulation Generate random number
     int randomEvent = rand() % 100 + 1;
 
@@ -40,6 +48,7 @@ void simulationStep () {
         carArrives(); // 45% probability
     }
     displayLine();
+   }
 }
 
 
