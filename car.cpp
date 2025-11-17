@@ -42,10 +42,16 @@ void simulationStep () {
     //Add simulation Generate random number
     int randomEvent = rand() % 100 + 1;
 
-    if(randomEvent <= 55) { //55% probability
-        processCar();
+     //modify check if lane is empty handle 50/50 case
+    if(lanes[laneIndex].empty()) { 
+        if( randomEvent <= 50) {
+
+        }else {
+            cout<< "Empty lane - no operation" <<endl;
+        }
+    
     }else {
-        carArrives(); // 45% probability
+        if
     }
     displayLine();
    }
