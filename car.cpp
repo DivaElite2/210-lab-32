@@ -105,7 +105,15 @@ void switchlanes() {
     Car switchingCar = lanes[sourceLane].back();
 
     //remove it from source lane
-    lanes->pop_back()
+    lanes[sourceLane].pop_back();
+
+    //add it to destination lane 
+    lanes[destLane].push_back(switchingCar);
+
+    //print what happened
+    cout << "Lane Seitch: Car from lane " << sourceLane +1 << " to lane " << destLane + 1 << " -- ";
+    switchingCar.print();
+
 }
 
 
